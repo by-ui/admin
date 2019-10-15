@@ -18,7 +18,10 @@ router.beforeEach((to, form, next) => {
 
     /** 没有用户token 且不在登录页面 */
     if (!token && to.name !== 'login') {
-        window.location.href = "/login "
+        // window.location.href = "/login "
+        router.push({
+            name: 'login'
+        })
     }
     /** 有用户token 且在登录页面 */
     else if (token && to.name !== 'index') {
