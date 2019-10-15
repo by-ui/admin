@@ -1,0 +1,51 @@
+@import '~@/_config/theme.scss';
+
+// 消除在el-table高度变化时可能出现的表头偏移
+.el-table {
+    th.gutter {
+        display: table-cell !important;
+    }
+}
+
+// 使得element翻页更清晰
+.el-pagination {
+    .el-pager {
+        .number {
+            opacity: 0.5;
+            font-weight: 200;
+
+            &:hover {
+                opacity: 0.8;
+            }
+
+            &.active {
+                opacity: 1;
+                font-weight: 600;
+            }
+        }
+    }
+}
+
+// 表单必填项*改为主题色
+.el-form-item.is-required {
+    .el-form-item__label::before {
+        color: $theme-main-color !important;
+    }
+}
+
+// 避免el-upload上传时的抖动
+.el-upload-list__item.is-uploading {
+    display: none !important;
+}
+
+//避免文字过多一行占满的情况
+.el-tooltip__popper {
+    max-width: 400px;
+    line-height: 22px;
+}
+
+.el-cascader-menu__item__keyword {
+    padding-right: 0 !important;
+    color: $theme-main-color;
+    text-decoration: dotted 1px;
+}

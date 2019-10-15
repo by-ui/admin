@@ -1,0 +1,19 @@
+@import '~@/_config/theme.scss';
+
+$mp-themepacks-custom: (
+    /**/ main:
+        (
+            main: $theme-main-color,
+            accent: $theme-accent-color
+        )
+        /**/
+);
+
+$darken-ratio: 2%;
+
+@import '~maple-theme/src/maple-theme.scss';
+@import '~maple-theme/src/maple-theme-mixins.scss';
+
+body {
+    @include mp-theme-color(1);
+}
