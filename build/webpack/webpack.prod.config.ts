@@ -26,6 +26,7 @@ module.exports = merge(baseCfg, {
             filename: "index.html",
             title: "123",
             template: path.resolve("src/index.html"),
+            favicon: './favicon.ico',
             showErrors: true,
         }),
     ],
