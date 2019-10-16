@@ -33,7 +33,8 @@
                         <by-dropdown-menu slot="menu">
                             <by-dropdown-item><i class="icon icon-user"></i>108108888@qq.com</by-dropdown-item>
                             <by-dropdown-item><i class="icon icon-settings"></i>账号设置</by-dropdown-item>
-                            <by-dropdown-item divided="true" @click.native="logout"><i class="icon icon-log-out"></i>退出登录</by-dropdown-item>
+                            <by-dropdown-item divided="true"
+                                              @click.native="logout"><i class="icon icon-log-out"></i>退出登录</by-dropdown-item>
                         </by-dropdown-menu>
                     </by-dropdown>
                 </li>
@@ -46,7 +47,7 @@
 
     @Component
     export default class AppHeader extends Vue {
-        logout(){
+        logout() {
             window.localStorage.removeItem('token');
             this.$router.push({
                 name: 'login'
@@ -63,6 +64,10 @@
         height: 64px;
         background-color: #2b83f9;
         background-image: linear-gradient(143deg, #1d42ab, #2173dc, #1e93ff);
+        // /deep/ ul {
+        //     animation: none;
+        //     -webkit-animation: none;
+        // }
         .icon-dv {
             border-radius: 50%;
             width: 40px;
@@ -114,6 +119,10 @@
             padding-right: 10px;
             align-items: center;
             justify-content: flex-end;
+            .ul-list {
+                animation: none;
+                -webkit-animation: none;
+            }
             .menu-list {
                 display: inline-block;
                 color: rgba(255, 255, 255, 0.75);

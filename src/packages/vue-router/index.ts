@@ -12,6 +12,10 @@ const options: RouterOptions = {
 
 const router = new VueRouter(options);
 
+import vueg from 'vueg'
+
+Vue.use(vueg, router,)
+
 router.beforeEach((to, form, next) => {
 
     const token = window.localStorage.getItem('token');
