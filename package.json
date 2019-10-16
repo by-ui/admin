@@ -4,7 +4,7 @@
     "description": "",
     "scripts": {
         "start": "webpack-dev-server --open --config build/webpack/webpack.dev.config.js",
-        "build": "cross-env TS_NODE_PROJECT='build/tsconfig.node.json' webpack --config build/webpack/webpack.prod.config.ts --progress"
+        "build": "cross-env TS_NODE_PROJECT='build/tsconfig.node.json' ENV='production' DOMAIN='production' webpack --config build/webpack/webpack.prod.config.ts --progress"
     },
     "author": "",
     "license": "ISC",

@@ -7,6 +7,9 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const mode = process.env.ENV;
+const isProduction = (mode === "production");
+
 module.exports = {
     entry: {
         index: [path.resolve("src/index.ts")]
@@ -27,6 +30,9 @@ module.exports = {
             "utils-scss": path.resolve("src/utils/scss/utils-scss.scss"),
         },
         extensions: ['.ts', '.tsx', '.js']
+    },
+    performance: {
+        hints: false
     },
     module: {
         rules: [{
@@ -61,53 +67,29 @@ module.exports = {
             ]
         },
         {
-            test: /\.css$/,
+            test: /\.(sa|sc|c)ss$/,
             use: [
-                'style-loader',
+                {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        hmr: !isProduction,
+                    },
+                },
                 {
                     loader: "css-loader",
                     options: {
-                        sourceMap: true
-                    }
-                }
-            ]
-        },
-        {
-            test: /\.scss$/,
-            use: [
-                'style-loader',
-                {
-                    loader: "css-loader",
-                    options: {
-                        sourceMap: true
+                        sourceMap: !isProduction
                     }
                 },
                 {
                     loader: "sass-loader",
                     options: {
-                        sourceMap: true
+                        sourceMap: !isProduction
                     }
                 },
             ]
-        },
-        {
-            test: /\.less$/,
-            use: [
-                'style-loader',
-                {
-                    loader: "css-loader",
-                    options: {
-                        sourceMap: true
-                    }
-                },
-                {
-                    loader: "less-loader",
-                    options: {
-                        sourceMap: true
-                    }
-                },
-            ]
-        }, {
+        }
+        , {
             test: /\.(png|jpe?g|gif|svg)$/,
             include: /image/,
             loader: "url-loader",
@@ -129,9 +111,10 @@ module.exports = {
     },
     plugins: [
         new VueLoaderPlugin(),
-        // new MiniCssExtractPlugin({
-        //     filename: '[name].[contenthash].css'
-        // }),
+        new MiniCssExtractPlugin({
+            filename: '[name].[contenthash].css',
+            chunkFilename: isProduction ? '[name].[contenthash].css' : '[name].css'
+        }),
         new HtmlPlugin({
             filename: "index.html",
             title: "AWD",
@@ -140,8 +123,8 @@ module.exports = {
         }),
         // new webpack.DefinePlugin({
         //     'process.env': {
-        //         domain: JSON.stringify(domain),
-        //         host: JSON.stringify(host),
+        //         domain: JSON.stringify(env.domain),
+        //         host: JSON.stringify(env.host),
         //     },
         // }),
     ]
